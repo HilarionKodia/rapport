@@ -1,0 +1,795 @@
+\documentclass[overfullbox]{polytech/polytech}
+
+% LISEZ LE MODE D'EMPLOI POUR L'INTEGRALITE DES CONSIGNES
+
+% on ajoute ici des packages supplémentaires
+% Attention : il peut y avoir des incompatibilités avec la classe de document
+
+\usepackage{lipsum} %permet de générer du texte
+
+% on indique le département concerné (di)
+\schooldepartment{di}
+% on indique le type de projet concerné (prd)
+\typereport{prd}
+% on indique l'année en cours
+\reportyear{2015-2016}
+
+% on donne un titre au travail (sans dépasser 2 lignes à l'affichage)
+\title{LOGICIEL DE GESTION DES ABSCENCES}
+% on peut donner un sous titre (sans dépasser 2 lignes à l'affichage) mais ce n'est pas nécessaire
+%\subtitle{Recherche du Projet}
+% on peut donner un logo illustrant le projet (hauteur d'affichage 4cm) mais ce n'est pas nécessaire
+%\reportlogo{polytech/modeemploi}
+
+
+% Le(s) étudiant(s) aux formats suivants :
+% \student{Prénom}{Nom}{Mail}
+% \student[Année d'études]{Prénom}{Nom}{Mail}
+\student[DI5]{Hilarion}{KODIA}{ahimanlionelHilari@etu.univ-tours.fr}
+
+% Le(s) superviseur(s) académique (ou encadrant(s)) aux format suivants :
+% \academicsupervisor{Prénom}{Nom}{mail}
+% \academicsupervisor[Affiliation]{Prénom}{Nom}{mail}
+\academicsupervisor[Département infomatique]{Yannick}{KERGOSIEN}{yannick.kergosien@univ-tours.f}
+%\academicsupervisor{Machin}{Chose}{machin.chose@univ-tours.fr}
+% Le(s) tuteur(s) entreprise aux formats suivants :
+% \companysupervisor{Prénom}{Nom}{Mail}
+% \companysupervisor[Fonction]{Prénom}{Nom}{Mail}
+%\companysupervisor[Fonction très importante]{Un}{Gars}{un.gars@example.com}
+%\companysupervisor{Un deuxième}{Gars}{undeuxieme.gars@example.com}
+% L'entreprise aux formats suivants :
+%	\company{Nom de l'entreprise}{Adresse}{URL du site web}
+% \company[logo entreprise]{Nom de l'entreprise}{Adresse}{URL du site web}
+% S'il est indiqué le logo de l'entreprise s'affichera sur une hauteur de 1cm
+% Attention : pour que les tuteurs entreprise s'affichent, l'entreprise doit être définie
+%\company[polytech/polytech]{Laboratoire Informatique}{64 avenue Jean Portalis\\37200 Tours}{http://li.univ-tours.fr}
+%\company{Laboratoire Informatique}{64 avenue Jean Portalis, 37200 Tours}{li.univ-tours.fr}
+
+
+% On indique les mots clés avec \motcle{mot clé} en français et \keyword{keyword} en anglais
+% Le résumé significatif et descriptif du contenu du rapport en 5 à 10 lignes se spécifie par \resume{...} en français et \abstract{...} en anglais
+% Attention : tout doit tenir sur la dernière page
+\resume{t}
+% chaque mot clé ou groupe de mots clés est défini via la commande \motcle en français
+\motcle{tr}
+\motcle{rt}
+\motcle{tr}
+\motcle{t}
+
+% résumé en anglais
+\abstract{ }
+
+% chaque mot clé ou groupe de mots clés est défini via la commande \motcle en anglais
+% Attention : il n'y a pas forcément une traduction directe entre les mots clés et les keywords
+\keyword{tr}
+\keyword{tr}
+\keyword{t}
+\keyword{tr}
+
+\bibliography{biblio}
+
+% le document commence ici
+\begin{document}
+
+% on commence par générer la page de titre, la liste des intervenants, les tables des matières, figures, tables, listings
+\maketitle
+ 
+ 
+% Le chapitre d'introduction générale n'est souvent pas numéroté
+% La commande \unnumberedchapter fonctionne de façon identique à \chapter mais produit un chapitre non numéroté présent dans la table des matières (à la différence de \chapter*)
+% Attention : un chapitre sans numéro (et ses sections) ne peu(ven)t pas être référencé(s) dans le document (\label, \ref)
+\unnumberedchapter[Titre court pour l'entête]{Introduction}
+Au cours de ma dernière année de cycle Ingénieur en Informatique à l'école Polytechnique de l'Université de Tours, j'ai été amené à réaliser,  pour le compte d'un tiers, un projet de recherche et développement appelé communément PRD. L’objectif de ce projet est de mettre à profit les compétences théoriques et techniques que nous avons acquises au cours de notre cursus.\\
+
+Dans le cadre de ce projet, j'ai donc été amené pour le compte de Mademoiselle Karine Romero et Mademoiselle Julie Gasparini qui travaillent au service scolarité de l'école, 
+à mettre en place un logiciel de gestion d'absence des étudiants au sein de mon établissement. J'ai été encadré dans cette tâche par Monsieur Yannick Kergosien Enseignant dans cette école et Maître de conférences en sa qualité de tuteur académique.\\
+
+Pour ce projet, j'ai été affecté à l'équipe OC (Ordonnancement et Conduite) de l'école POLYTECH Tours. Il se divise en deux phases distinctes. Une phase de recherche qui s'est déroulée de septembre 2015 à mi-janvier 2016 et une phase de développement et de mise en production qui se déroule de mi-janvier 2016 à fin mars 2016.
+
+
+
+ % on ajoute du texte automatique
+
+% Je peux diviser le rapport en partie
+\part{RECHERCHE ET DEVELOPPEMENT}
+\label{part:recherche}
+
+% un chapitre non numéroté peut avoir des sections, sous sections... mais c'est rare
+\chapter{LE PROJET}
+\section{CONTEXTE}
+Ce projet se situe dans le cadre de ma dernière année de cycle ingénieur en informatique à l'école Polytechnique de de l'Université de Tours.Il a pour objectif de mettre en place un système informatique de gestion des absences des étudiants au sein du département informatique de l'école Polytech Tours.
+
+La gestion des absences/présences par année de formation consiste à : 
+ \begin{itemize}
+	\item Saisir les absences des étudiants aux séances de cours, travaux pratiques, travaux dirigés et examens.
+    \item Enregistrer les justificatifs d'absence fournis par les étudiants.
+  \item Dénombrer les absences par semestre, par cours, par séances, par examen et par étudiants pour pouvoir établir des statistiques sur l’année universitaire.
+  \newline
+ \end{itemize}
+ 
+L’avantage majeur dans ce projet est de pouvoir repartir d’une solution déjà existante. Celle-ci à été développée dans le cadre d'un PFE effectue l'année dernière par Mademoiselle Khoumri Imane. Le but étant de rendre cette solution opérationnelle, de corriger les bugs éventuels, de la rendre plus ergonomique, de l'améliorer en y ajoutant certaines fonctionnalités qui seront énoncées plus loin.
+
+\section{ANALYSE DE L'EXISTANT}
+La solution existante permet : 
+\begin{itemize}
+	\item d'ajouter/modifier des étudiants
+    \item d'ajouter/modifier/supprimer des matières
+    \item d'ajouter/modifier/supprimer des semestres
+    \item d'ajouter/modifier/supprimer des promotions
+    \item de saisir et imprimer des fiches d'appel
+    \item de gérer les justificatifs d'absences des étudiants
+    \item d'ajouter/modifier/supprimer des utilisateurs
+    \newline
+\end{itemize}
+mais présente des problèmes qui sont énoncés ci-dessous :
+
+\begin{itemize}
+\item Lorsque l'on ajoute une matière, on ne peut pas l'affecter à un module ou une option.
+\item Tant que la base de données est vide on ne peut pas ajouter d'étudiants, de matières, de groupes, de modules ni d'options.
+\item On ne peut pas supprimer un étudiant lorsque celui-ci est affecté a un groupe.
+  \item Le script de mise en place de la base de données ne fonctionne pas correctement car celui-ci n'est pas générique.
+  \item L'ajout de modules ou d'options ne fonctionnent pas correctement. Quand on ajoute un module celui-ci est directement considéré comme une option et vice versa ce qui n'est pas le cas en pratique.
+  \item La suppression de modules et d'options ne fonctionne pas correctement car ceux-ci figurent toujours dans la base de données même après validation de la suppression. 
+  \item Quand on ajoute un groupe on ne peut pas lui affecter des étudiants.
+  \item Le module de gestion des fiches d'appel ne fonctionne pas correctement car \textbf{}on ne peut ni modifier ni supprimer les fiches d'appels.
+  \item Lorsque l'on ajoute un étudiant on ne peut pas spécifier si il a déjà validé des matières ou si il est en Erasmus.
+ \item Le module de modification de mot de passe utilisateur fonctionne mais doit être améliorer car celui-ci ne vérifie pas si l'ancien et le nouveau mot de passe sont identiques ou non.
+ \item L'utilisateur n'a pas la possibilité de modifier ses données personnelles.
+ \item Le module permettant d'effectuer une recherche ne marche pas.
+\item La rubrique plan d'accès n'a pas été développée. 
+\item Le module de génération de statistiques en temps réel n'a pas été mis en place.
+\item L'envoi de messages d'alerte aux étudiants régulièrement absents ne fonctionne pas.
+
+\end{itemize}
+
+\section{LES BESOINS}
+
+\subsection{Les besoins du client}
+Le client représenté par Mademoiselle Karine Roméro et Mademoiselle Julie Gasparini qui travaillent au service scolarité de l'école POLYTECH Tours avaient exprimées le besoin d'avoir un outil informatique leur permettant de gérer les absences des étudiants au sein de cette école. Cette gestion jusqu'à présent s'effectuait de façon manuelle ce qui représentait une tâche ardue, pénible et qui leur demandait beaucoup de temps. Elles étaient donc désireuses d'avoir un outil opérationnel qui leur faciliterait cette tâche. Cet outils doit principalement permettre de : 
+ 
+\begin{itemize}
+		\item Gérer les données des étudiants.
+        \item Gérer les données des utilisateurs.
+        \item Gérer les matières.
+        \item Gérer les modules et les options.
+    	\item Saisir les fiches d'appels.
+        \item Gérer les justificatifs d'absences des étudiants.
+        \item Détecter les étudiants en difficulté selon leur taux d’absentéisme
+ \end{itemize}
+En plus de ces principales fonctionnalités le client désire que l'on puisse:
+\begin{itemize}
+	\item Importer les étudiants à partir d'un fichier excel pour éviter de les enregistrer un à un et gagner du temps.
+    \item Faire la distinction entre absence aux cours, TP , TD  et  examens.
+    \item Générer des statistiques en temps réel (globales et par étudiant) :
+    	\begin{itemize}
+		\item pourcentage  d'absence par semestre.
+		\item pourcentage d'absence par créneau horaire. 
+        \item pourcentage d'absence par cours et par examens.
+		\end{itemize}
+    \item Générer des rapports de ces statistiques sous forme de PDF.
+    \item Envoyer des mails de façon automatique aux étudiants ayant atteints un certain nombre d'absences.
+    \item Pouvoir mettre à jour facilement les données d'une année à une autre.
+    \item Générer des pdf contenant la liste des étudiants par promotion et par groupe.
+    \item Fermer la session après dix minutes d'inactivité.
+\end{itemize}
+
+\subsection{Les Besoins Non-fonctionnels du système}
+L’application doit être ergonomique, rapide et surtout facile à utiliser. Elle doit aussi répondre aux exigences suivantes :
+\begin{itemize}
+	\item Elle doit pouvoir être utilisée sur un téléphone mobile ou sur une tablette à l’aide d’une interface de gestion de type intranet.
+   \item Elle doit s’articuler autour d’un certain nombre de menus clairs, fonctionnels et facile à explorer.
+   \item Elle doit assurer une sécurité totale au niveau de la gestion des accès aux informations des utilisateurs et des étudiants du département car celles-ci sont confidentielles.
+   \item L’application doit être flexible et générique  de manière à ce qu'elle puisse être facilement déployée dans d’autres départements (DMS, DEE, Master,DP …).
+ \end{itemize}
+
+\section{SOLUTION PROPOSEE}
+
+ La solution proposée consiste à développer un système informatique destiné à l’école POLYTECH Tours pour gérer les absences des étudiants de tous les niveaux du département Informatique.
+Ce système sera à la fois :
+\begin{itemize}
+ \item Une application mobile destinée aux :
+\begin{itemize}
+	\item Professeurs pour faire la saisie des étudiants absents/présents ainsi que des fonctionnalités de gestion de cette saisie tel que :
+		\begin{itemize}
+			\item La modification de la liste des absents (en cas de retard de l’étudiant l’enseignant peut modifier la liste des absents).
+			\item L’annulation de la saisie (en cas de faute de frappe l’enseignant peut annuler la saisie).
+		\end{itemize}
+\end{itemize}
+\item Une application web destinée aux :
+ \begin{itemize}
+	\item Professeurs ne possédant pas de « Smartphones » ou « Tablettes » pour faire la saisie des étudiants absents/présents ainsi que les mêmes fonctionnalités présente dans la version mobile.
+	
+	\item Personnel administratif pour leur permettre de
+		\begin{itemize}
+        	\item gérer les absences des étudiants
+			\item gérer les justificatifs d'absences des étudiants
+       		 \item consulter les statistiques en temps réelles pour pouvoir détecter les étudiants en difficulté
+             \item gérer les données des étudiants et des utilisateurs
+             \item mettre à jour les données des étudiants d'une année à une autre
+            \end{itemize}
+     Ainsi que toutes les fonctionnalités complémentaires décrites plus haut.
+   \end{itemize}
+\end{itemize}  
+
+
+
+\section{PLANNING PREVISIONNEL}
+
+Pour éffectuer mon planning prévisionnel, j'ai divisé mon projet en plusieurs phases.
+\subsection{La Phase de reprise de l'existant}
+\textbf{\underline{Description}}
+\newline
+\newline
+Elle consiste dans un premier temps à comprendre l'organisation générale et le fonctionnement de l'application. Puis dans un second temps, à s'approprier le code de celle-ci ce qui implique la prise en main des différents langages et outils utilisés(HTML5, PHP, CSS3, JQUERY, WAMP SERVER....).
+\newline
+\newline
+\textbf{\underline{Livrables}}
+\newline
+\newline
+Aucun livrable n'est prévu pour cette tâche.
+\newline
+\newline
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 4 jours/homme.
+
+
+\subsection{La phase de spécification}
+\textbf{\underline{Description}}
+\newline
+\newline
+Elle consiste d'abord à faire un bilan de l'application, c'est à dire toutes les fonctionnalités et dysfonctionnements éventuels puis à proposer des améliorations et enfin rédiger le cahier des charges.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+\begin{itemize}
+\item Le cahier des charges.
+\newline
+\end{itemize}	
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 6 jours/homme.
+
+\subsection{La phase de recherche et innovation}
+\textbf{\underline{Description}}
+\newline
+\newline
+Elle consiste à effectuer une veille technologique en matière de techniques modernes ou non d'identification des personnes.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+
+\begin{itemize}
+\item L'état de l'art.
+\newline
+\end{itemize}	
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 10 jours/homme.
+
+\subsection{La rédaction du rapport sur la recherche}
+\textbf{\underline{Description}}
+\newline
+\newline
+Elle consister rédiger le rapport portant sur la première partie du projet : la recherche et l'innovation.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+
+\begin{itemize}
+\item Rapport sur la recherche et l'innovation.
+\item Le poster.
+\newline
+\end{itemize}	
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 2 jours/homme. 
+\newline
+\newline
+\textbf{\underline{Contrainte temporelle}}
+\newline
+\newline
+Le rapport et le poster doivent être rendu pour le 6 janvier 2016 à minuit.
+
+\subsection{La phase de développement}
+\textbf{\underline{Description}}
+\newline
+\newline
+C'est l'étape la plus longue du projet. Elle consiste à réparer tous les bugs éventuels de l'application existante. Puis à développer les nouvelles fonctionnalités énoncées.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+\newline
+\newline
+Aucun livrable n'est prévu pour cette tâche.
+\newline
+\newline
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 20 jours/homme.
+
+\subsection{La phase de tests}
+\textbf{\underline{Description}}
+\newline
+\newline
+Elle consiste à réaliser les différents tests sur l’application (tests unitaires, tests fonctionnels, etc...).
+\newline
+\newline
+\textbf{\underline{Livrables}}
+\newline
+\newline
+Aucun livrable n'est prévu pour cette tâche.
+\newline
+\newline
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 8 jours/homme.
+
+\subsection{La rédaction du rapport final}
+\textbf{\underline{Description}}
+\newline
+\newline
+Cette phase consiste rédiger le rapport final du projet.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+
+\begin{itemize}
+\item Rapport final.
+\newline
+\end{itemize}	
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 2 jours/homme. 
+\newline
+\newline
+\textbf{\underline{Contrainte temporelle}}
+\newline
+\newline
+Pas encore établie à ce jour.
+
+\subsection{La préparation de la soutenance}
+\textbf{\underline{Description}}
+\newline
+\newline
+Cette phase consiste à préparer la soutenance finale du projet.
+\newline
+\newline
+\textbf{\underline{Livrables}}
+
+\begin{itemize}
+\item Aucun livrable n'est prévu pour cette phase.
+\newline
+\end{itemize}	
+
+\textbf{\underline{Estimation de la charge}}
+\newline
+\newline
+Cette tâche est estimée à 2 jours/homme. 
+\newline
+\newline
+\textbf{\underline{Contrainte temporelle}}
+\newline
+\newline
+La date exacte de la soutenance n'est pas encore établie à ce jour.
+
+\subsection{Planning prévisionnel}
+Le diagramme ci-dessous représente le planning prévisionnel de mon projet.
+\begin{Figure}{fig:fig30}{Planning prévisionnel}
+\pgfimage[width=16cm]{gant.png} 
+\end{Figure}
+
+\section{OUTILS ET METHODES DE GESTION DE PROJET}
+Pour la réalisation de ce projet, j'ai opter en accord avec mon encadrant pour les méthodes agiles car elles me semblaient plus adaptées. Pour m'aider dans cette tâche j'ai utilisé \textbf{Trello}, qui est un outil de gestion de projet en ligne simple et intuitif.
+
+
+
+\chapter{ETAT DE L'ART}
+
+La phase de recherche et d'innovation de se projet s'est essentiellement concentrée sur les différentes techniques modernes et innovantes qui nous permettrait d'identifier les étudiants présents. 
+L'état de l'art de ce PRD  a donc consister à répertorier les différentes techniques d'identification biométriques ou non qui pourront être mises en place pour identifier les étudiants présents ainsi que les technologies et algorithmes utilisés pour y parvenir. 
+\newline
+\newline
+ La biométrie est essentiellement basée sur l'analyse des caractéristiques propres à chaque individus. Ces caractéristiques peuvent être morphologiques (empreinte digitale, forme de la main, traits du visage, réseau veineux de la rétine, voix, etc...), biologiques (odeur, salive, urine, sang , ADN, etc...) ou comportementales (tracé de signature, manière de frapper sur un clavier d'ordinateur etc...).
+\newline
+\newline
+Dans le cadre de mon PRD, je me suis principalement intéressé aux techniques d'identification biométriques suivantes : 
+\newline
+ \begin{itemize}
+ \item Identification par empreintes digitales, 
+ \item Identification faciale,
+ \item Identification vocale,
+ \item Identification par la rétine,
+ \item Identification par reconnaissance de l'iris,
+ \item Identification par le volume ou la forme de la main,
+\newline
+ \end{itemize}
+ 
+En plus de ces techniques biométriques d'identification, les étudiants pourront aussi être identifiés de manière classique à l'aide de leurs cartes étudiantes.
+
+\section{IDENTIFICATION PAR EMPREINTES DIGITALES}
+
+Les empreintes digitales sont de nos jours de plus en plus utilisées (exemple :verrouillage de téléphone, identification de porte d'accès, fichiers de police depuis le 19è siècle). Elles se basent sur l'empreinte laissée par les doigts qui est propre à chaque individu. 
+\newline  
+Selon le système Henry, les empreintes peuvent être classifiées en 3 catégories selon la forme des lignes que sont : les arches, les boucles et les tourbillons. La figure 2.1 montre un exemple dans chacune des familles qui représentent au final 95\% des doigts d'individus, la forme des boucles étant la plus commune. 
+
+
+\begin{Figure}{fig:fig20}{Classement des empreintes digitales}
+\pgfimage[height=3cm,width=10cm]{CaptureEmpreintesdigitales.PNG}
+\end{Figure}
+
+ 
+Pour caractériser une empreinte, les modélisations s'appuient sur des points stratégiques nommés minuties. Il existe plusieurs types de minuties, cependant la majeure partie des algorithmes de comparaison n'en utilisent que quatre : 
+\begin{itemize}
+\item Les terminaisons : figure a.
+ \item Les bifurcations :  figure b.
+ \item Les îles : figure d et e .
+ \item Les lacs : figure c.
+\end{itemize}
+
+
+\begin{Figure}{fig:fig38}{Types de minuties}
+\pgfimage[height=2cm,width=10cm]{minuties.PNG}
+\end{Figure}
+
+Les étudiants présents en cours pourront donc être identifiés par leurs empreintes digitales à l'aide d'un système permettant de capturer cette empreinte.
+
+\subsection{Système de capture d'une empreinte digitale}
+La capture d'une empreinte digitale a pour but d'obtenir une image permettant d'identifier les différentes minuties de celle-ci.
+Il existe plusieurs capteurs permettant d'effectuer cette opération. Les plus fréquents sont les capteurs optiques et les capteurs thermiques.
+
+
+\subsubsection {Les capteurs optiques}
+Ils sont composés d'une caméra CCD, d'un prisme en verre sur lequel l'on pose le doigt et d'une lampe utilisée pour éclairer le prisme. Une fois l'image capturée, le capteur la convertit en un format numérique tel que le BITMAP. La figure ci-dessous nous montre un exemple de capteur optique. Celui-ci est produit par la société chinoise Chongqing Huifan Technology Co.
+
+
+\begin{Figure}{fig:fig2}{Capteur Optique}
+\pgfimage[height=4cm,width=4cm]{capteurOptique.PNG}
+\end{Figure}
+
+
+Le principal avantage des capteurs optiques est leur robustesse face aux fluctuations de température. Les images ainsi obtenues sont d'excellente qualité. Le prix de ces capteurs reste abordable. Par exemple le capteur présenté plus haut ne coûte que 117 euros TTC frais de port inclus. 
+
+\subsubsection {Les capteurs Thermique}
+Lorsque l'on pose notre doigt sur un capteur thermique. Celui-ci mesure les températures obtenues aux différents point de contact entre notre doigt et le socle. Ce qui permet une identification nette et précise des différentes minuties. La figure ci-dessous nous présente un exemple de capteur optique : le fingerChip d'Atmel. C'est le capteur optique le plus fréquemment utilisé.
+
+\begin{Figure}{fig:fig21 }{le FingerChip d'Atmel}
+\pgfimage[height=4cm,width=4cm]{atmel.PNG}
+\end{Figure}
+
+Les images obtenues à l'aide d'un capteur thermique sont de très bonnes qualité. Ces capteurs sont très robustes et ont un prix abordable, il faut compter une centaine d'euros pour obtenir un capteur thermique.
+\newline
+Une fois l'image de l'empreinte digitale capturée et stockée au format adéquat, celle-ci est traitée par des algorithmes de reconnaissance qui seront décris dans la section suivante. 
+
+\subsection{Algorithmes de reconnaissance d’empreintes digitales}
+L'algorithme de reconnaissance d'empreintes digitales le plus connu est celui de A.K Jain[1], présenté en 1997. Cet algorithme effectue :
+\begin{itemize}
+ 	\item Un filtrage et la binairisation de l’image pour diminuer le bruit.
+    \item Une squeléttisation permettant d'obtenir des lignes de tailles uniformes,
+    \item L'identification et l'extraction des minuties,
+    la figure ci-dessous résume les trois premières étapes du processus de reconnaissance. Dans celle-ci les minuties identifiées ont été colorées.
+    
+    \begin{Figure}{fig:fig22}{Processus de reconnaissance d'empreintes digitales}
+	\pgfimage[height=6cm,width=14cm]{reco.PNG}
+	\end{Figure}
+	
+    \item Une fois les minuties déterminées, elles sont ensuite comparées pour permettre l'identification des individus. Le processus de comparaison  s'apparente à du <<point pattern matching>>. Celui-ci nécessite dans notre cas la constitution d'une base de données contenant les empreintes digitales de tous les étudiants. Il est impossible d'obtenir deux empreintes digitales similaires à 100\%, c'est pourquoi il est important de définir un seuil d'acceptation. Certaines améliorations ont été apportées par A.K. JAIN[6] avec un algorithme de comparaison basé sur la transformée de Hough généralisée.
+    \newline 
+\end{itemize}
+
+
+Notons qu'il existe plusieurs algorithmes de squellétisation. Les plus connus sont ceux proposés par Zhang[3] et par Shapori[4]. Le tableau ci-dessous, extrait d'une étude réalisée par Mme Christel-Loïc TISSE, Mr Lionel MARTIN, Mr Lionel TORRES et Mr Michel ROBERT de l'Université de Montpellier[5] compare de façon expérimentale ces deux algorithmes. 
+
+\begin{Figure}{fig:fig3}{Comparaison Expérimentale des algorithmes de Zhang et de Shapori}
+\pgfimage[height=6cm,width=10cm]{squelette.PNG}
+\end{Figure}
+
+ 
+Il est aussi important de signaler qu'une autre méthode de détermination des minuties a été proposée par D. Maio[2]. Celle-ci est basée sur les réseaux de neurones. 
+\subsection{Conclusion}
+
+La biométrie par l’empreinte digitale est la technologie la plus utilisée dans le monde. Cette technologie est fiable et le coût de mise en place est abordable. 
+
+Dans notre cas, la en place cette technologie implique donc dans un premier temps l'achat d'un capteur d'empreintes digitales thermique ou optique. Puis dans un second temps, la constitution d'une base de données contenant les empreintes digitales de tous les étudiants de l'établissement.
+
+Le capteur d'empreintes digitales pourra être disposé à l'entrée de chaque salles de cours ou sur le bureau du professeur. Les étudiants, pour s'identifier devront simplement poser leurs doigts sur celui-ci. Une fois l'identification faite, les informations obtenues sur l'identité de l'étudiant seront transmises au logiciel de gestion d'absence qui se chargera de mettre à jour la fiche d'appel. 
+
+
+
+\section{IDENTIFICATION FACIALE}
+Les hommes depuis des millénaires s'identifient entre eux par leur visage. Identifier une personne par les traits du visage est donc quelque chose de naturel chez l'être humain. L'identification faciale comme le montre la figure ci-dessous se base sur certaines caractéristiques mesurables du visage telles-que la largeur des lèvres, la forme du visage, la distance entre les yeux, la distance entre les yeux et les oreilles etc...
+
+\begin{Figure}{fig:fig4}{Caractéristiques du visage}
+\pgfimage[height=4cm,width=6cm]{visage3.PNG}
+\end{Figure}
+
+
+
+Pour identifier les étudiants, il faudra donc prendre une image du visage de ceux-ci. 
+
+\subsection{Capture de l'image du visage}
+Pour capturer l'image du visage des différents étudiants, l'on peut envisager d'utiliser une webcam ou un appareil photo qui sera disposé à l'entrée de chaque salles de classes ou sur le bureau du professeur. La figure ci-dessous présente un exemple de webcam, celle-ci est produite par la société Logitech et ne coûte que 39 euros TTC. 
+
+\begin{Figure}{fig:fig5}{Webcam}
+\pgfimage{webcam.PNG}
+\end{Figure}
+
+
+Une fois l'image du visage obtenu celle-ci pourra être traitée et analysée afin d'identifier l'étudiant à l'aide de différentes techniques et algorithmes décrits dans la section suivante.
+
+
+\subsection{Techniques de reconnaissance par analyse du visage}
+ Elles sont basées sur l'analyses de caractéristiques du visage stables dans le temps tel-que la distance entre les yeux, la taille des orbites, la distance entres les yeux et les oreilles etc.. Il existe plusieurs méthodes de reconnaissance par analyse du visage mais les plus connues sont : 
+ 
+\begin{itemize}
+\item La méthode Eigenface : qui à été proposée pour la première fois en 1987 par L. Sirovich et M. Kirby[7]. Elle à été utilisée par M. Turk and A. Pentland[8] en 1991 pour classifier des visages. c'est la méthode la plus utilisée. Le principe est simple, elle représente les différentes caractéristiques du visage sous forme de modèles en niveau de gris comme dans la figure ci-dessous.
+
+\begin{Figure}{fig:fig6}{La méthode Eigenface}
+\pgfimage[height=8cm,width=9cm]{visage.jpeg}
+\end{Figure}
+
+Une fois cette opération effectuée, elle transforme ces images en vecteurs, dont chaque élément correspond à la luminosité de chaque pixels. Ces vecteurs seront ensuite utilisés pour identifier les étudiants.
+\item La méthode proposée par J. Zhang et Y. Yan [9], elle est basée sur les réseaux de neurones.
+\item La méthode de traitement automatique de visage, elle a été proposée en 2000 par C. Beumier et M. Acheroy[10]. Comme le montre la figure ci-dessous, elle se base sur la distance entre certains points particuliers du visages tels que la bouche, le nez, le menton, les oreilles, les yeux et les sourcils...
+
+\begin{Figure}{fig:fig7}{Traitement automatique du visage}
+\pgfimage[height=5cm,width=6cm]{visages.PNG}
+\end{Figure}
+\end{itemize}
+
+
+\subsection{Conclusion}
+La reconnaissance faciale est utilisée dans de nombreux domaines tels que la police, le domaine bancaire etc... Elle est très fiable et le coût de mise en place est abordable (compter une quarantaine d'euros  pour avoir une webcam de bonne qualité). Ce système est capable de reconnaître les individus mêmes ci ceux-ci sont munis d'artifices tels-que de fausses moustaches, de fausses barbes ou autre.  Cependant le système peut être confronté à certaines difficultés face à des jumeaux. Pour mettre en place cette technologie, il nous faudra donc acquérir une webcam. Les étudiants pour être identifiés devront se présentés face à elle le temps de la capture de l'image de leur visage. Cela implique qu'une base de données contenant les vecteurs caractéristiques des visages des étudiants et les informations concernant ces étudiants, devra être mise en place. Une fois l'étudiant identifié, le système pourra mettre à jour les fiches d'appel.
+
+ 
+\section{IDENTIFICATION VOCALE}
+L'identification vocale est une technique d'identification qui date du vingtième siècle. Elle est utilisée dans plusieurs domaines tels que les centres d'appels. Les systèmes d'identification vocale se basent sur certaines caractéristiques de la voix qui sont uniques d'une personne à une autre. Ces caractéristiques dépendent de l'état physique, mental de l'individu et de plusieurs facteurs comportementaux et physiologiques. Pour être identifier, les étudiants devront prononcer une ou plusieurs phrases spécifiques. Ces phrases seront enregistrées et analysées grâce à un système de capture de la voix.
+
+\subsection{Système de capture de la voix}
+La voix des différents étudiants pourra être enregistrée à l'aide d'un enregistreur de voix. Il existe de nombreux enregistreurs de voix, la figure ci-dessous en présente un : le TravelMike. Celui-ci est vendu au prix de 278 euros et peut être relier au PC par un port USB.
+
+
+\begin{Figure}{fig:fig8}{Capture de la voix}
+\pgfimage[height=6cm,width=5cm]{voc.PNG}
+\end{Figure}
+ 
+Une fois capturée, la voix est numérisée  sur 8 ou 16 bits à une fréquence d’échantillonnage qui varie entre 8 kHz et 48 kHz. La voix numérisée est ensuite traitée pour permettre l'identification des étudiants.
+
+\subsection{Le processus de traitement de la voix}
+D'après Joseph Mariani[11] dans son étude sur le traitement du signal, le processus de traitement automatique de la voix est composé de trois étapes qui sont : 
+\begin{itemize}
+\item La paramétrisation,
+\item La classification,
+\item La décision.
+\end{itemize}
+
+\subsubsection{La paramétrisation}
+Elle consiste à déterminer les paramètres qui seront pertinents lors la reconnaissance de la voix des étudiants. D'après WOLF dans son article sur le choix de paramètres efficients pour l’authentification du locuteur [12], ces paramètres doivent être fréquents, facilement mesurables et robustes face aux bruits et aux imitateurs. De ce article, il en ressort que les paramètres de l'analyse spectrale restent les plus efficaces et les plus pertinents. Les principaux paramètres de l'analyse spectrale sont les coefficients de prédiction linéaire. Pour ces coefficients  l'on se référera aux thèses de Grenier  [13] et d'Homayounpour [14]. Une fois ces paramètres identifiés , ceux-ci sont stockés dans des vecteurs qui serviront à effectuer la classification. 
+
+\subsubsection{La classification}
+Le but de la classification est de comparer les vecteurs du signal enregistré aux vecteurs présents dans la base de donnée afin d'identifier l'étudiant. Il existe plusieurs méthodes de classification. Les principales méthodes de classification sont basées sur les réseaux de neurones; les champs de Markov et les mélanges gaussiens. Une fois cette classification effectuée, le système peut prendre une décision.
+
+\subsubsection{La décision}
+C'est la dernière phase du processus de traitement de la voix. Elle permet de faire l'identification du locuteur c'est à dire ici les étudiants. Du faite que la voix dépende de plusieurs facteurs morphologiques et physiologiques, il est impossible d'avoir un taux de similitude de 100\% entre deux vecteurs de paramètres. Il est donc primordial de fixer un seuil d'acceptation.
+
+\subsection{Conclusion}
+
+Pour l'être humain, il est naturel de reconnaître une personne par sa voix. La biométrie par la voix est simple et facile à utiliser. Elle est très fiable. Il est impossible de frauder car le traitement de la voix ne se base que sur certaines caractéristiques vocales uniques qui dépendent de la morphologie et de la physiologie de chaque individu. Ce système coûte un peu cher, il faut par exemple compter quelques centaines d'euros pour certains enregistreurs de voix. 
+
+Dans notre cas celui-ci pourra par exemple être disposé sur le bureau du professeur. Les étudiants pour être reconnus devront prononcer les différentes phrases spécifiques pré-enregistrées dans le système. Une fois l'identification de l'étudiant terminée celui-ci mettra à jour la fiche d'appel.
+
+\section{IDENTIFICATION PAR LA RETINE}
+L'identification des individus par la rétine a été très utilisée par l'armée américaine dans les années 70.
+La rétine est l'organe sensible de la vision. Elle est située au fond de l'œil et sert à capturer les informations visuelles qu'elle convertit ensuite en messages nerveux. Une fois ces informations converties, elle les transmet au cerveau. Elle reste stable tout au long de notre vie. Les rétines sont différenciées en elles par leur réseau vasculaire. La figure ci-dessous en présente deux exemples.
+
+\begin{Figure}{fig:fig9}{Exemples de 2 rétines différentes}
+\pgfimage[height=2.5cm,width=6cm]{retine1.PNG}
+\end{Figure}
+
+
+La capture de l'image d'une rétine requiert un dispositif spécial qui sera décris dans la section suivante.
+
+\subsection{Dispositif de capture de l’image d’une rétine}
+L'œil étant un organe sensible, il est donc délicat d'obtenir une image de la rétine. Le dispositif de capture est composé d'un faisceau lumineux qui sera utilisé pour éclairer le fond de l'œil ou se trouve la rétine et d'une caméra CCD qui viendra ensuite en récupérer une image. Il existe plusieurs types capteurs d'image de la rétine, la figure ci-dessous en présente un exemple: le scanner Myris développé par la société américaine Eyelock. Ce scanner peut être branché à n'importe quel port USB. D'après ce groupe le taux d'erreur de ce capteur est d'une chance sur 2.25 milliards. Il est vendu au prix de 273 euros.
+
+\begin{Figure}{fig:fig10}{Lecteur Myris par Eyelock}
+\pgfimage[height=5cm,width=5cm]{myris.jpg}
+\end{Figure}
+
+
+Ces dispositifs requiert que les individus soient à faible distance du capteur. Les étudiants pour être identifier de manière fiable devront donc se rapprocher du capteur afin que celui-ci puisse obtenir une image précise et nette de leur rétine. Cette image est ensuite numérisée en un format tel que le BITMAP. Notons que le faisceau lumineux utilisé par les différents scanners de rétines est de très faible intensité donc sans danger pour l'œil humain. Une fois l'image de la rétine obtenue celle-ci est analysée afin de procéder à l'identification des étudiants.
+
+\subsection{Le processus d'identification par la rétine}
+Le processus d'identification consiste dans un premier temps à localiser l'emplacement des différentes veines qui se situent sur la rétine. Puis à extraire à partir de ce réseau veineux unique, 92 points de repères. La dernière étape consiste à calculer à l'aide d'algorithmes de comparaison, le taux de concordance entre ces 92 points . C'est ce taux de concordance qui permettra d'identifier une personne. Les algorithmes de comparaison de points caractéristiques de la rétine sont nombreux et assez complexes. Cependant les plus connus sont : 
+ 
+\begin{itemize}
+\item L'algorithme proposé par S.M.R KABIR[15], qui calcul un pourcentage de corrélation entre les segments angulaires (longueur de l'arc de cercle) des différentes rétines.
+
+\item L'algorithme proposé par C. MARINO [16], qui compare les arbres extraient du réseau vasculaire de la rétine.
+
+\item L'algorithme proposé par M.D AMIRI [17],  qui compare à l'aide d'une transformée de Fourrier et de la métrique de Manhattan les partitions radiales et angulaires extraites du réseau vasculaire de la rétine.
+
+\end{itemize}
+
+
+\subsection{Conclusion}
+L'identification par la rétine est une technique biométrique fiable et très utilisée de nos jours. Cette technologie est abordable et simple à mettre en place car il suffit de se munir d'un scanner de rétine. De nos jours, ces scanners sont très de bonne qualité et produisent d'excellents résultats en matière de reconnaissance.   Dans le cadre de mon projet, je propose le scanner Myris présenté plus haut. Celui-ci a un prix assez raisonnable. Il pourra par exemple être disposé à l'entrée de chaque salle de cours ou sur le bureau du professeur. Les étudiants pour s'identifier devront juste scanner l'image de leur rétine. Les fiches d'appels pourront être mises à jour une fois l'identification effectuée. Le faisceau lumineux étant sans danger pour l'homme, le scanner pourra être utilisé autant de fois que cela sera nécessaire. Cette technologie, malgré une fiabilité élevée reste très sensible au diabète et à l'alcoolémie ce qui peut poser un petit problème quand on connaît le mode de vie des étudiants. 
+
+
+
+
+\section{IDENTIFICATION PAR RECONNAISSANCE DE L'IRIS}
+L'iris est la partie colorée de l'œil. elle est formé de plusieurs lamelles pigmentaires qui donnent la couleur aux yeux. Plus ces pigments seront riches en mélamine et plus les yeux seront foncés. La figure ci-dessous présente un exemple d'iris.
+
+\begin{Figure}{fig:fig11}{Exemple d'Iris}
+\pgfimage[height=5cm,width=5cm]{iris.PNG}
+\end{Figure}
+
+
+L'utilisation de l'iris pour la reconnaissance a été proposée pour la 1ère fois en 1936 par l'ophtalmologue Frank Burch. Cependant ce n'est qu'en 1987 que cette idée fut brevetée par Aran safir et Leornard Flom eux aussi ophtalmologues. L'iris étant unique d'une personne à l'autre cela en fait une technique d'identification très fiable. Les étudiants, une fois rentrés dans la salle de cours pourront donc notifier leur présence à l'aide de leur iris. Capturer l'image de l'iris nécessite un dispositif qui sera présenté dans la section suivante.
+
+\subsection{Dispositif de capture d'image d'iris}
+Pour capturer l'image de l'iris, l'on utilise le même dispositif que celui de la rétine, c'est à dire une source de lumière utilisée pour éclairer l'œil couplée à une caméra CCD monochrome (640x480) qui capture l'image de l'iris. Tout comme la capture de l'image d'une rétine, cette opération est délicate car l'iris est aussi un organe très sensible. Cependant contrairement à la capture de l'image de la rétine celle de l'iris dépend fortement de la lumière ambiante car la taille de l'iris varie selon celle-ci. Pour la capture de l'image de l'iris l'on peut donc utiliser les mêmes scanners que ceux de la rétine tel que le scanner Myris de la société Eyelock qui ne coûte que 273 euros. La seule différence se trouve dans les algorithmes qui seront utilisés dans le processus d'identification. 
+
+
+\subsection{Le processus d'identification par l'iris}
+Le processus d'identification a été décris en long et en large par Daugman dans [18]. Pour l'instant l'algorithme de Daugman est la méthode la plus utilisée pour la reconnaissance par l'iris. Une fois l'image de l'iris obtenue la première étape consiste à en diminuer le bruit à l'aide d'un filtre gaussien puis à la segmenter pour faciliter la localisation de l'iris . La position de l'iris dans l'image est ensuite déterminée à l'aide de la transformée de HOUGH.
+\newpage
+
+\begin{Figure}{fig:fig12}{Détection de l'iris}
+\pgfimage[height=5cm,width=5cm]{iris6.jpg}
+\end{Figure}
+
+
+Une fois l'iris localisé, l'on en extrait 240 points de reconnaissance qui seront cryptés en un gabarit appelé irisCode. C'est ce gabarit qui servira à identifier les différents individus. Il est obtenu à partir de l'analyse de la texture de l'iris. Notons que la taille de l'iriscode dépend fortement du degré de dilatation de l'iris.
+
+\begin{Figure}{fig:fig13}{Representation de l'iriscode}
+\pgfimage[height=5cm,width=15cm]{iris3.PNG}
+\end{Figure}
+
+
+\subsection{Conlusion} 
+La biométrie par l'iris est avec celle de la rétine l'une des techniques d'identification les plus fiables au monde.  L'iris est stable dans le temps et est unique d'un individus à un autre ce qui implique que les risques de fraudes sont quasis inexistants. De plus elle est aussi abordable car elle utilise les mêmes scanners que ceux utilisés pour la rétine. Pour identifier les étudiants nous pouvons donc utilisé le scanner Myris. Cependant il faudra juste être vigilent sur l'environnement de capture car celui-ci a une grande influence sur les résultats. Le scénario d'identification des étudiants sera le même que celui de la rétine à savoir que les étudiants devront scanner leur iris à chaque entrée en salle de classe à l'aide du scanner Myris qui sera disposé à l'entrée de celle-ci ou sur le bureau du professeur . 
+
+
+\section{IDENTIFICATION PAR LA FORME DE LA MAIN}
+
+La biométrie par la forme de la main est très utilisée dans certaines usines telles que celles du géant coca-cola et certains laboratoires pour le pointage horaire et le contrôle d'accès physique. Elle ne se base que sur les éléments de la géométrie de la main tels que les dimensions des doigts, de la paume , des articulations etc... Les étudiants  pourront s'identifier à l'aide de leur main en utilisant un dispositif spécial qui sera décris dans la section suivante.
+
+\subsection{Dispositif d'acquisition de la géométrie de main}
+Ce dispositif est composé d'une caméra infrarouge qui est chargée de prendre une photographie de la main sous deux angles différents afin d'en obtenir une image en trois dimensions. Il existe de nombreux scanners de géométrie de la main. Cependant ceux-ci coûtent relativement chers. La figure ci-dessous présente un exemple de scanner de géométrie de la main le HandPunch GT 400 produit par la société allemande SCHALGE. Celui-ci est vendu au prix de 2800 dollars soit 2567 euros et peut être relier à l'ordinateur à l'aide d'un port USB.
+
+\begin{Figure}{fig:fig14}{Le HandPunch GT 400}
+\pgfimage[height=9cm,width=10cm]{hand.PNG}
+\end{Figure}
+
+Ce scanner pourra être disposé à l'entrée de chaque salle de classe. Les étudiants pour s'identifier auront juste à mettre leur main sur le scanner en respectant les lignes dessinées sur celui-ci. Une fois l'image tridimensionnelle de la main obtenue l'identification de l'étudiant est ensuite effectuée à l'aide d'un processus spécifique qui est décris dans la partie suivante.
+
+\subsection{Le processus d'identification par la forme de la main}
+Ce processus à été décris par David Zhang et Vivek Kanhangad dans [24]. L'image est d'abord filtrée à l'aide d'un filtre gaussien puis binairisée, ce qui la transforme en noir et blanc. Ensuite l'on effectue une segmentation afin de déterminer les contours de la main. La figure ci-dessous présente un exemple de résultat obtenu après segmentation de l'image d'une main.
+
+\begin{Figure}{fig:fig15}{Résultat obtenu après segmentation}
+\pgfimage[height=5cm,width=5cm]{main2.PNG}
+\end{Figure}
+
+
+Une fois l'image segmentée et les contours déterminés, on en extrait 90 points caractéristiques. Puis à l'aide de ces points, on procède aux calculs des mesures. Ce calcul comme expliqué plus haut ne porte que sur les dimensions de certaines parties de la main telles que les doigts, les articulations, la paume etc.. Les mesures obtenues sont ainsi stockées dans un gabarit qui sera utilisé pour effectuer la comparaison afin d'identifier les étudiants.
+
+\begin{Figure}{fig:fig46}{Mesures effectuées}
+\pgfimage[height=5cm,width=6cm]{main34.PNG}
+\end{Figure}
+
+
+\subsection{Conclusion}
+
+La Biométrie par la forme de la main est très fiable et simple à mettre en place. Elle est rapide car les informations à traiter sont de petites tailles contrairement a celles de l'iris. Cependant le coût élevé des différents scanners utilisés en font une technologie moins accessible. Pour identifier les étudiants, il suffit de se munir d'un scanner de la forme de la main qui peut être disposé à l'entrée des salles de cours. Les étudiants n'auront plus qu'a scanner leur main avant l'accès a la salle de cours. Une fois l'identification effectuée le système mettra à jour la liste d'appel. L'inconvénient majeur de cette technique en plus de son coût, reste le faite que la forme de la main peut changer dans le temps. Cet changement peut être du à des blessures ou fractures importantes de la main. 
+
+
+\section{AUTRES TECHNIQUES BIOMETRIQUES D'IDENTIFICATION}
+
+\subsection{L'identification par le réseau veineux de la main ou du pouce}
+C'est une technique d'identification très récente. Elle a été développée par les chercheurs des laboratoires d'Hitachi et de Fujistu. Elle est basée sur les caractéristiques uniques du réseau veineux de la main ou du pouce obtenues à l'aide d'une caméra infrarouge.
+
+\subsection{L'identification par la démarche}
+Cette technique de reconnaissance est basée sur la manière de marcher et de bouger, c'est à dire l'accélération, la vitesse, le mouvement du corps etc... en examinant des séquences d'images. Cette technique est très fiable mais reste cependant très coûteuse.
+
+\subsection{L'identification par l'odeur} 
+Cette technique n'est pas très répandue car peu de personnes seraient prêtes à se faire renifler tous les matins. Elle est basée sur l'odeur corporelles et les fluides qui émanent de notre corps.
+
+\subsection{L'identification par la signature}
+ Cette technique est beaucoup utilisée dans le domaine bancaire et le commerce électronique. Elle est basée sur l'inclinaison du stylo, la vitesse d'écriture et la pression.
+
+
+\subsection{L'identification par la thermographie faciale}
+Dans cette technologie, l'on enregistre la chaleur émise par la peau. L'inconvénient majeur se trouve dans les conditions de prise de vues car la température de la peau est susceptible de changer selon les saisons ou selon l'état physique de l'individu.
+
+\section{IDENTIFICATION PAR LA CARTE ETUDIANTE}
+
+Cette technique d'identification est simple et est déjà mise en place au sein de l'école mais seulement pour gérer l'accès aux bâtiments et aux salles de classes. Elle utilise le lecteur de carte à puce \textbf{Gunnebo smart}. Les étudiants pour s'identifier ont juste à passer leur carte étudiante sur le lecteur. Le coût de mise en place de cette technique  sera donc quasi nul car l'école possède déjà les lecteurs.  Il faudra juste effectuer le lien entre le lecteur de carte à puce et notre logiciel de gestion d'absences afin de pouvoir mettre à jour nos différentes fiches d'appel.  
+
+\begin{Figure}{fig:fig16}{Lecteur de carte à puce Gunnebo smart}
+\pgfimage[height=6cm,width=6cm]{reader.jpg}
+\end{Figure}
+
+Cependant dans notre contexte d'utilisation, cette technique d'identification n'est pas très fiable car les risques de fraudes sont élevés. Par exemple les étudiants pourront scanner les cartes étudiantes de leurs confrères absents. 
+
+
+\section{CONCLUSION}
+
+Les techniques d'identifications biométriques sont des moyens très fiables d'identifier des personnes. Il en existent plusieurs, certaines sont plus récentes et plus fiables que d'autres, d'autres plus abordables. Cependant dans le cadre de mon PRD, une technique d'identification me semble être la plus intéressante du faite de son coût abordable, de sa fiabilité, de sa stabilité dans le temps, de sa facilité de mise en place et d'utilisation. Il s'agit de la biométrie par empreinte digitale. Cette technique nécessiterait juste l'achat d'un capteur d'empreinte digitale tel que le FingerChip produit par la société Atmel qui ne coûte que 117 euros TTC frais de port inclus. ce capteur installé à l'entrée des salles de classes ou sur le bureau du professeur, permettrait d'identifier de façon fiable les étudiants. La fiche d'appel sera mise à jour à chaque fois qu'un étudiant sera identifié. Une fois l'identification de tous les étudiants effectuée le professeur pourra valider cette fiche qui sera ensuite enregistrée dans notre base de données. 
+
+
+
+
+\part{Rapport technique}
+\label{part:technique}
+
+
+
+%\chapter{truc}
+
+
+%\section{Ma section}
+
+
+%\section{Ma section}
+
+
+
+
+\unnumberedchapter{Conclusion}
+
+\appendix
+
+\chapter{Ma première annexe}
+
+
+
+\chapter{Ma deuxième annexe}
+
+\cite{article,online1}
+
+
+\weeklyreport{17/09/2015}{
+	A ce jour mon poste de travail m'a été attribué.Les sources et les livrables fournis dans le cadre du PFE de l'année dernière m'ont été remis par
+Mr KERGOSIEN ce qui m'a permis de commencer à appréhender le fonctionnement de l'application.}
+
+\weeklyreport{24/09/2015}{
+	Après avoir lu tous les rapports, testé l'application existante, j'ai parcouru les sources de celle afin de me les approprier. Je suis désormais en mesure d'expliquer le fonctionnement de chaque module. 
+}
+
+\weeklyreport{01/10/2015}{
+	A cette date, j'ai dressé une liste de tous les bugs que j'ai repéré dans l'application. Puis à la suite d'une réunion avec  Mademoiselle Karine ROMERO et Mademoiselle Julie GASPARINI , fait un bilan de toutes les fonctionnalités et améliorations restantes.
+}
+ 
+\weeklyreport{22/10/2015}{
+	J'ai terminé la rédaction de mon cahier des charges puis l'ait soumis pour validation au client. Celui a été validé après quelques petites modifications et corrections. Ce qui me permet de commencer mes recherches afin de dresser un état de l'art.
+}
+ 
+\weeklyreport{19/11/2015}{
+	Je dispose à ce jour de nombreux documents, rapports , thèses , et sites internet répertoriant et expliquant les différentes techniques d'identifications biométriques qui pourront servir à identifier les étudiants. Il ne me restera plus qu'a les parcourir afin de rédiger mon état de l'art.
+}
+
+\weeklyreport{3/12/2015}{
+	A ce jour j'ai finit la rédaction de mon état de l'art. Je peux maintenant me pencher sur la rédaction de mon rapport final portant sur la partie recherche.
+}
+
+% petite astuce pour tout citer : A NE PAS REPRODUIRE DANS VOTRE RAPPORT
+\nocite{*}
+
+\makelastpages
+
+\end{document}
